@@ -10,6 +10,7 @@ def print_menu():
     print("1. Add Sweet")
     print("2. Delete Sweet")
     print("3. View Sweets")
+    print("4. Search Sweet")
 while True:
     print_menu()
     choice = input("Enter your choice: ")
@@ -42,6 +43,25 @@ while True:
     elif choice == "3":
         sweets = shop.view_sweets()
         for s in sweets:
+            print(f"{s.id} | {s.name} | {s.category} | ₹{s.price} | Qty: {s.quantity}")
+    
+
+    # Here we are going to add search funcitonality
+
+    elif choice == "4":
+        name = input("Search name")
+        category = input("Category")
+        min_price = input("Min price")
+        max_price = input("Max price")
+        results = shop.search(
+            name=name or None,
+            category=category or None,
+            price_range=(
+                float(min_price) if min_price else 0,
+                float(max_price) if max_price else float('inf')
+            ) if min_price or max_price else None
+        )
+        for s in results:
             print(f"{s.id} | {s.name} | {s.category} | ₹{s.price} | Qty: {s.quantity}")
 
 

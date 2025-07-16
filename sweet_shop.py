@@ -19,3 +19,18 @@ class SweetShop:
 # View Implementation
     def view_sweets(self):
         return self.sweets
+    
+# Search implementation
+
+    def search(self, name=None, category=None, price_range=None):
+        results = self.sweets
+        if name:
+            results = [s for s in results if name.lower() in s.name.lower()]
+        if category:
+            results = [s for s in results if category.lower() in s.category.lower()]
+        if price_range:
+            min_price, max_price = price_range
+            results = [s for s in results if min_price <= s.price <= max_price]
+        return results
+    
+

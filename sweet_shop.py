@@ -15,3 +15,7 @@ class SweetShop:
         self.sweets = [s for s in self.sweets if s.id != sweet_id]
         if len(self.sweets) == initial_count:
             raise ValueError("Sweet not found for deletion.")
+        
+# View Implementation
+    def view_sweets(self):
+        return self.sweets

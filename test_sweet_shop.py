@@ -48,6 +48,17 @@ class TestSweetShop(unittest.TestCase):
         self.shop.delete_sweet(12)
         self.assertEqual(len(self.shop.sweets), 0)
 
+# View test for sweets
+    def test_view_sweets(self):
+            s1 = Sweet(13, "Ladoo", "Festival", 15.0, 10)
+            s2 = Sweet(14, "Kaju Katli", "Nut", 25.0, 5)
+            self.shop.add_sweet(s1)
+            self.shop.add_sweet(s2)
+            sweets = self.shop.view_sweets()
+            self.assertEqual(len(sweets), 2)
+            self.assertEqual(sweets[0].name, "Ladoo")
+            self.assertEqual(sweets[1].name, "Kaju Katli")
+
 
 if __name__ == '__main__':
     unittest.main()

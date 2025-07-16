@@ -8,7 +8,7 @@ def print_menu():
     print("\n==== Sweet Shop Menu ====")
     #For Adding Sweets
     print("1. Add Sweet")
-
+    print("2. Delete Sweet")
 while True:
     print_menu()
     choice = input("Enter your choice: ")
@@ -26,4 +26,15 @@ while True:
             print("Sweet added sucessfully")
         except ValueError as e:
             print(f"Error: {e}")
+            
+    # Here the sweets would be deleted by the user
+    elif choice == "2":
+        sid = int(input("ID to delete: "))
+        try:
+            shop.delete_sweet(sid)
+            print("Sweet deleted.")
+        except ValueError as e:
+            print(f"Error: {e}")
+
+
         

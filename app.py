@@ -11,6 +11,7 @@ def print_menu():
     print("2. Delete Sweet")
     print("3. View Sweets")
     print("4. Search Sweet")
+    print("5. Sort Sweets")
 while True:
     print_menu()
     choice = input("Enter your choice: ")
@@ -64,5 +65,27 @@ while True:
         for s in results:
             print(f"{s.id} | {s.name} | {s.category} | ₹{s.price} | Qty: {s.quantity}")
 
+# Sorting according to the name, Price, Quantity
+    elif choice == "5":
+        print("Sort by:")
+        print("1. Name")
+        print("2. Price")
+        print("3. Quantity")
+        sort_choice = input("Choose sort key: ")
 
-        
+        key_map = {"1": "name", "2": "price", "3": "quantity"}
+        key = key_map.get(sort_choice)
+        if not key:
+            print("Invalid sort option.")
+            continue
+
+        order = input("Sort descending? (y/n): ")
+        reverse = order.lower() == 'y'
+
+        try:
+            sorted_sweets = shop.sort_sweets(key=key, reverse=reverse)
+            for s in sorted_sweets:
+                print(f"{s.id} | {s.name} | {s.category} | ₹{s.price} | Qty: {s.quantity}")
+        except ValueError as e:
+            print(f"Error: {e}")
+    

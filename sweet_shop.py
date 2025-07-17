@@ -33,4 +33,11 @@ class SweetShop:
             results = [s for s in results if min_price <= s.price <= max_price]
         return results
     
+# Sort with Name, Price, Quantity Implementation 
+
+    def sort_sweets(self, key="name", reverse=False):
+        valid_keys = {"name", "price", "quantity"}
+        if key not in valid_keys:
+            raise ValueError("Invalid sort key. Use 'name', 'price', or 'quantity'.")
+        return sorted(self.sweets, key=lambda s: getattr(s, key), reverse=reverse)
 

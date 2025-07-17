@@ -9,4 +9,4 @@ For test cases we used the unittest, which help us for TDD(Test driven Developme
 
 For the CLI interface use app.py
 
-For using UI of our app use webapp.py
+For using UI of app use webapp.py

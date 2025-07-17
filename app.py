@@ -13,6 +13,8 @@ def print_menu():
     print("4. Search Sweet")
     print("5. Sort Sweets")
     print("6. Purchase Sweet")
+    print("7. Restock Sweet")
+    print("8. Exit")
 while True:
     print_menu()
     choice = input("Enter your choice: ")
@@ -100,3 +102,16 @@ while True:
         except ValueError as e:
             print(f"Error: {e}")
     
+# Restock 
+    elif choice == "7":
+        sid = int(input("Sweet ID: "))
+        qty = int(input("Quantity to restock: "))
+        shop.restock(sid, qty)
+        print("Restocked.")
+
+    elif choice == "8":
+        print("Exiting... Goodbye!")
+        break
+
+    else:
+        print("Invalid choice.")

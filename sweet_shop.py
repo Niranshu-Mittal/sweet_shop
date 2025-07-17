@@ -50,3 +50,11 @@ class SweetShop:
                 s.quantity -= quantity
                 return
         raise ValueError("Sweet not found")
+    
+# Restock
+    def restock(self, sweet_id, quantity):
+        for s in self.sweets:
+            if s.id == sweet_id:
+                s.quantity += quantity
+                return
+        raise ValueError("Sweet not found")

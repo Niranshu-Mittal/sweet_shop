@@ -12,6 +12,7 @@ def print_menu():
     print("3. View Sweets")
     print("4. Search Sweet")
     print("5. Sort Sweets")
+    print("6. Purchase Sweet")
 while True:
     print_menu()
     choice = input("Enter your choice: ")
@@ -86,6 +87,16 @@ while True:
             sorted_sweets = shop.sort_sweets(key=key, reverse=reverse)
             for s in sorted_sweets:
                 print(f"{s.id} | {s.name} | {s.category} | ₹{s.price} | Qty: {s.quantity}")
+        except ValueError as e:
+            print(f"Error: {e}")
+
+# Purchase or Inventory
+    elif choice == "6":
+        sid = int(input("Sweet ID: "))
+        qty = int(input("Quantity to buy: "))
+        try:
+            shop.purchase(sid, qty)
+            print("Purchase successful.")
         except ValueError as e:
             print(f"Error: {e}")
     

@@ -41,3 +41,12 @@ class SweetShop:
             raise ValueError("Invalid sort key. Use 'name', 'price', or 'quantity'.")
         return sorted(self.sweets, key=lambda s: getattr(s, key), reverse=reverse)
 
+# Purchase order implementation
+    def purchase(self, sweet_id, quantity):
+        for s in self.sweets:
+            if s.id == sweet_id:
+                if s.quantity < quantity:
+                    raise ValueError("Not enough stock")
+                s.quantity -= quantity
+                return
+        raise ValueError("Sweet not found")

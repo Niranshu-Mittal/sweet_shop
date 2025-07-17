@@ -90,5 +90,18 @@ class TestSweetShop(unittest.TestCase):
         sorted_sweets = self.shop.sort_sweets(key="price", reverse=True)
         self.assertEqual([s.price for s in sorted_sweets], [30, 20])
 
+# Purchase or Inventory test
+    def test_purchase_success(self):
+        sweet = Sweet(40, "Ladoo", "Festival", 15.0, 10)
+        self.shop.add_sweet(sweet)
+        self.shop.purchase(40, 3)
+        self.assertEqual(self.shop.sweets[0].quantity, 7)
+
+    def test_purchase_insufficient_stock(self):
+        sweet = Sweet(41, "Ladoo", "Festival", 15.0, 2)
+        self.shop.add_sweet(sweet)
+        with self.assertRaises(ValueError):
+            self.shop.purchase(41, 5)
+
 if __name__ == '__main__':
     unittest.main()

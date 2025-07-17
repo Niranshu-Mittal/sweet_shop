@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Add New Sweet</h2>
+<form method="post">
+    <div class="mb-3">
+        <label>ID</label>
+        <input type="text" name="id" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Name</label>
+        <input type="text" name="name" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Category</label><br>
+        <input type="radio" name="category" value="Milk" required> Milk
+        <input type="radio" name="category" value="Nut"> Nut
+        <input type="radio" name="category" value="Fried"> Fried
+    </div>
+    <div class="mb-3">
+        <label>Price (₹)</label>
+        <input type="number" name="price" class="form-control" min="0" step="0.1" required>
+    </div>
+    <div class="mb-3">
+        <label>Quantity</label>
+        <input type="number" name="quantity" class="form-control" min="0" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Sweet</button>
+</form>
+{% endblock %}

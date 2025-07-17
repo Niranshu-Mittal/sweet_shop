@@ -1,10 +1,16 @@
 # test_sweet_shop.py
 import unittest
-from sweet import Sweet
-from sweet_shop import SweetShop
+from src.sweet import Sweet
+from src.sweet_shop import SweetShop
 
-# Other Validations used here
-class TestSweetValidation(unittest.TestCase):
+
+
+# Here we are measuring the TestCases
+class TestSweetShop(unittest.TestCase):
+    def setUp(self):
+        self.shop = SweetShop()
+
+# Validation
     def test_invalid_id_type(self):
         with self.assertRaises(ValueError):
             Sweet("abc", "Ladoo", "Dessert", 10.0, 5)
@@ -12,6 +18,10 @@ class TestSweetValidation(unittest.TestCase):
     def test_empty_name(self):
         with self.assertRaises(ValueError):
             Sweet(1, "   ", "Candy", 10.0, 5)
+    
+    def test_empty_category(self):
+        with self.assertRaises(ValueError):
+            Sweet(2, "Ladoo", "   ", 10.0, 5)
 
     def test_negative_price(self):
         with self.assertRaises(ValueError):
@@ -20,12 +30,14 @@ class TestSweetValidation(unittest.TestCase):
     def test_negative_quantity(self):
         with self.assertRaises(ValueError):
             Sweet(3, "Barfi", "Milk", 20.0, -1)
+    
+    def test_non_numeric_price(self):
+        with self.assertRaises(ValueError):
+            Sweet(5, "Ladoo", "Milk", "ten", 5)
 
-# Here we are measuring the TestCases
-class TestSweetShop(unittest.TestCase):
-    def setUp(self):
-        self.shop = SweetShop()
-
+    def test_non_integer_quantity(self):
+        with self.assertRaises(ValueError):
+            Sweet(6, "Ladoo", "Milk", 10.0, "five")
 # Add test
     def test_add_sweet_successfully(self):
         sweet = Sweet(1, "Ladoo", "Festival", 15.0, 10)
@@ -39,6 +51,11 @@ class TestSweetShop(unittest.TestCase):
         self.shop.add_sweet(sweet1)
         with self.assertRaises(ValueError):
             self.shop.add_sweet(sweet2)
+    
+    def test_add_invalid_id_type(self):
+        with self.assertRaises(ValueError):
+            sweet = Sweet("1a", "Ladoo", "Festival", 15.0, 10)
+            self.shop.add_sweet(sweet)
 
 # Delete test
     
@@ -47,6 +64,10 @@ class TestSweetShop(unittest.TestCase):
         self.shop.add_sweet(sweet)
         self.shop.delete_sweet(12)
         self.assertEqual(len(self.shop.sweets), 0)
+    
+    def test_delete_invalid_id_type(self):
+        with self.assertRaises(ValueError):
+            self.shop.delete_sweet("invalid_id")
 
 # View test for sweets
     def test_view_sweets(self):
@@ -102,6 +123,10 @@ class TestSweetShop(unittest.TestCase):
         self.shop.add_sweet(sweet)
         with self.assertRaises(ValueError):
             self.shop.purchase(41, 5)
+    
+    def test_purchase_invalid_id_type(self):
+        with self.assertRaises(ValueError):
+            self.shop.purchase("invalid_id", 1)
 
 #Restock tests
     def test_restock_sweet(self):
@@ -109,6 +134,10 @@ class TestSweetShop(unittest.TestCase):
         self.shop.add_sweet(sweet)
         self.shop.restock(42, 10)
         self.assertEqual(self.shop.sweets[0].quantity, 15)
+    
+    def test_restock_invalid_id_type(self):
+        with self.assertRaises(ValueError):
+            self.shop.restock("invalid_id", 5)
 
 
 if __name__ == '__main__':

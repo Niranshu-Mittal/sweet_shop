@@ -1,6 +1,6 @@
 # app.py
-from sweet_shop import SweetShop
-from sweet import Sweet
+from src.sweet_shop import SweetShop
+from src.sweet import Sweet
 
 shop = SweetShop()
 
@@ -20,25 +20,29 @@ while True:
     choice = input("Enter your choice: ")
 
     if choice == "1":
-        #Here the sweets would be given by the user
-        sid = int(input("Sweet ID: "))
-        name = input("Sweet Name: ")
-        category = input("Sweet Category: ")
-        price = float(input("Price: "))
-        qty = int(input("Quantity: "))
-        sweet = Sweet(sid, name, category, price, qty)
         try:
+            sid_input = input("ID: ")
+            if not sid_input.isdigit():
+                raise ValueError("ID must be a valid integer.")
+            sid = int(sid_input)
+            name = input("Name: ")
+            category = input("Category: ")
+            price = float(input("Price: "))
+            qty = int(input("Quantity: "))
+            sweet = Sweet(sid, name, category, price, qty)
             shop.add_sweet(sweet)
-            print("Sweet added sucessfully")
+            print("Sweet added!")
         except ValueError as e:
             print(f"Error: {e}")
-
+    
     # Here the sweets would be deleted by the user
     elif choice == "2":
-        sid = int(input("ID to delete: "))
         try:
-            shop.delete_sweet(sid)
-            print("Sweet deleted.")
+            sid = input("ID to delete: ")
+            if not sid.isdigit():
+                raise ValueError("ID must be an integer.")
+            shop.delete_sweet(int(sid))
+            print("Deleted (if it existed).")
         except ValueError as e:
             print(f"Error: {e}")
     
@@ -94,20 +98,27 @@ while True:
 
 # Purchase or Inventory
     elif choice == "6":
-        sid = int(input("Sweet ID: "))
-        qty = int(input("Quantity to buy: "))
         try:
-            shop.purchase(sid, qty)
+            sid = input("Sweet ID: ")
+            if not sid.isdigit():
+                raise ValueError("ID must be a valid integer.")
+            qty = int(input("Quantity to buy: "))
+            shop.purchase(int(sid), qty)
             print("Purchase successful.")
         except ValueError as e:
             print(f"Error: {e}")
     
 # Restock 
     elif choice == "7":
-        sid = int(input("Sweet ID: "))
-        qty = int(input("Quantity to restock: "))
-        shop.restock(sid, qty)
-        print("Restocked.")
+        try:
+            sid = input("Sweet ID: ")
+            if not sid.isdigit():
+                raise ValueError("ID must be a valid integer.")
+            qty = int(input("Quantity to restock: "))
+            shop.restock(int(sid), qty)
+            print("Restocked.")
+        except ValueError as e:
+            print(f"Error: {e}")
 
     elif choice == "8":
         print("Exiting... Goodbye!")
